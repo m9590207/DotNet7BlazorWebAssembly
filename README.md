@@ -13,17 +13,13 @@
 
 ## API 
 ** 狠api https://github.com/m9590207/DotNet7MinimalAPI
-### 琩高Super Hero by ID
-**GET /api/SuperHero/{id}**
-
-### 穝Super Hero by ID
-**PUT /api/SuperHero/{id}**
-
-### 埃Super Hero by ID
-**DELETE /api/SuperHero/{id}**
-  
-### 穝糤Super Hero 
-**POST /api/SuperHero**
-
-### 琩高┮ΤSuper Hero
-**GET /api/SuperHero**
+** 琩高Super Hero by ID 
+* GET /api/SuperHero/{id}
+** 穝Super Hero by ID
+* PUT /api/SuperHero/{id}
+** 埃Super Hero by ID
+*DELETE /api/SuperHero/{id}  
+** 穝糤Super Hero 
+* POST /api/SuperHero
+** 琩高┮ΤSuper Hero
+* GET /api/SuperHero
