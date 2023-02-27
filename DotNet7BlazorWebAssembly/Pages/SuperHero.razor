@@ -1,0 +1,81 @@
+﻿@page "/SuperHero"
+@page "/SuperHero/{id:int}"
+@inject NavigationManager NavigationManager
+@inject ISuperHeroService SuperHeroService
+
+@if(Id is null)
+{
+    <PageTitle>Create a new SuperHero</PageTitle>
+    <h3>Create a new SuperHero</h3>
+}
+else
+{
+    <PageTitle>Edit @superHero.Name</PageTitle>
+    <h3>Edit @superHero.Name</h3>
+}
+
+<EditForm Model="superHero" OnSubmit="HandleSubmit">
+    <div>
+        <label for="name">Name</label>
+        <InputText id="name" @bind-Value="superHero.Name" class="form-control"/>
+    </div>
+    <div>
+        <label for="place">Place</label>
+        <InputText id="place" @bind-Value="superHero.Place" class="form-control" />
+    </div>
+    <br/>
+    <button type="submit" class="btn btn-primary">@btnText</button>
+    <button type="button" class="btn btn-danger" @onclick="DeleteSuperHero">
+        Delete SuperHero
+    </button>
+</EditForm>
+
+
+
+@code {
+    [Parameter]
+    public int? Id { get; set; }
+
+    string btnText = string.Empty;
+
+    DotNet7BlazorWebAssembly.Models.SuperHero superHero = new DotNet7BlazorWebAssembly.Models.SuperHero();
+
+    protected override void OnInitialized()
+    {
+        btnText = Id == null ? "Save New SuperHero" : "Update SuperHero";
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if(Id is not null)
+        {
+            var result = await SuperHeroService.GetSuperHeroById((int)Id);
+            if(result is not null)
+            {
+                superHero = result;
+            }
+            else
+            {
+                //查無資料重導一次切到create new superhero
+                NavigationManager.NavigateTo("/SuperHero");
+            }
+        }
+    }
+
+    async Task HandleSubmit()
+    {
+        if(Id is null)
+        {
+            await SuperHeroService.CreateSuperHero(superHero);
+        }
+        else
+        {
+            await SuperHeroService.UpdateSuperHero((int)Id, superHero);
+        }
+    }
+
+    async Task DeleteSuperHero()
+    {
+        await SuperHeroService.DeleteSuperHero(superHero.Id);
+    }
+}

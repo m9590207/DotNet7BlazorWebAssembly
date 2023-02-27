@@ -1,0 +1,56 @@
+﻿@page "/SuperHeroes"
+@inject NavigationManager NavigationManager
+@inject ISuperHeroService SuperHeroService
+
+<h3>SuperHeroes</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Place</th>
+            <th>LastModified</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var SuperHero in SuperHeroService.SuperHeroes)
+        {
+            <tr>
+                <td>@SuperHero.Name</td>
+                <td>@SuperHero.Place</td>
+                <td>@SuperHero.LastModified</td>
+                <td>
+                    <button class="btn btn-primary"
+                        @onclick="(() => ShowSuperHero(SuperHero.Id))">
+                        <i class="oi oi-pencil"></i>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<button class="btn btn-primary"
+        @onclick="CreateNewSuperHero">
+    Create New SuperHero
+</button>
+
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        await SuperHeroService.GetAllSuperHeroes();
+    }
+
+    void ShowSuperHero(int id)
+    {
+        NavigationManager.NavigateTo($"/SuperHero/{id}");
+    }
+
+    void CreateNewSuperHero()
+    {
+        NavigationManager.NavigateTo($"/SuperHero");
+    }
+
+}
