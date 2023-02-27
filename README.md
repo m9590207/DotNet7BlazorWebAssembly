@@ -7,7 +7,6 @@
 * 查詢所有super hero
 ### SuperHero
 * 新增super hero
-* SuperHero/{id}
 * 修改super hero
 * 刪除super hero
 
