@@ -1,6 +1,6 @@
 # Super Hero service
 
-* .Net7 Blazor Web Assembly
+* .Net7 Blazor WebAssembly
 
 ## Page 
 ## SuperHeroes
@@ -11,5 +11,5 @@
 * 刪除super hero
 
 ## API 
-* 後端api https://github.com/m9590207/DotNet7MinimalAPI
+* 此前端網頁使用的後端api https://github.com/m9590207/DotNet7MinimalAPI
 
